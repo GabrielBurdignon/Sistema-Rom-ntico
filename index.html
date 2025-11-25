@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Para a minha Victória 💕</title>
+</head>
+<body>
+   <div class="card">
+
+    <!-- LOGIN -->
+    <div id="login-screen">
+      <h1>Oi, Victória 💕</h1>
+      <p>
+        Lembra desse dia especial?
+        <span class="highlight">Quando começamos a namorar 💘</span>
+      </p>
+
+      <div class="input-group">
+        <label for="password">Digite a data (dd/mm/aaaa)</label>
+        <input type="password" id="password" placeholder="01/06/2006">
+      </div>
+
+      <button id="login-button">Entrar</button>
+      <p id="error"></p>
+    </div>
+
+    <!-- TELA PRINCIPAL (1) -->
+    <div id="main-screen" class="hidden">
+      <h2>Bem-vinda, meu amor 💘</h2>
+      <p class="highlight">Você sempre lembra da nossa data.</p>
+
+      <div class="love-note">
+        <span class="mini-title">Um recadinho pra você:</span>
+        <p>
+          Desde 09/06/2023, cada dia com você é o meu favorito.  
+          Obrigado por ser meu amor, minha paz e meu lugar seguro. ❤️
+        </p>
+      </div>
+
+      <span class="mini-title">Clique para ganhar um carinho:</span>
+      <button id="compliment-button">Me dá um carinho 🥰</button>
+      <div class="compliment-box" id="compliment-text">
+        Clique no botão para receber um carinho.
+      </div>
+
+      <div class="counter">
+        <span class="mini-title">Nosso tempo juntos 💫</span>
+        <p>Estamos juntos há <span id="days-count">0</span> dias.</p>
+      </div>
+
+      <button id="next-button">Avançar ➜</button>
+    </div>
+
+    <!-- TELA 2 - GALERIA -->
+    <div id="gallery-screen" class="hidden">
+      <h2>Alguns momentos nossos 🥹</h2>
+
+      <div class="gallery">
+        <div class="photo-card">
+          <img src="/img/foto3.jpeg" alt="Foto 1 do casal">
+          <div>O primeiro dia que meu coração soube que era você. ❤️</div>
+        </div>
+
+        <div class="photo-card">
+          <img src="/img/foto2.jpeg" alt="Foto 2 do casal">
+          <div>Momentos simples com você viram momentos perfeitos. ✨</div>
+        </div>
+
+        <div class="photo-card">
+          <img src="/img/foto1.jpeg" alt="Foto 3 do casal">
+          <div>Eu olho pra essa foto e penso: como tenho sorte. 💘</div>
+        </div>
+      </div>
+
+      <button class="back-btn" id="back-button">⟵ Voltar</button>
+    </div>
+
+  </div>
+
+  <script src="/js/index.js"></script>
+</body>
+</html>
