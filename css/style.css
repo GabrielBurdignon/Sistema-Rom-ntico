@@ -1,0 +1,174 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffd6e8, #ff8fa3, #ff5d8f);
+      overflow: hidden; /* pra não aparecer scroll com os corações */
+      position: relative;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 24px 24px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      position: relative;
+      z-index: 2; /* fica acima dos corações */
+    }
+
+    .hidden { display: none; }
+
+    h1 { font-size: 1.6rem; margin-bottom: 10px; }
+    h2 { font-size: 1.4rem; margin-bottom: 8px; }
+    p { font-size: 0.95rem; margin-bottom: 10px; }
+    .highlight { color: #ff4b7a; font-weight: 600; }
+
+    .input-group { margin-top: 16px; margin-bottom: 8px; }
+    label { font-size: 0.85rem; margin-bottom: 4px; color: #555; }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #ff4b7a;
+      box-shadow: 0 0 0 2px rgba(255, 75, 122, 0.18);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4b7a, #ff7ca3);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(255, 75, 122, 0.35);
+      transition: transform 0.1s, box-shadow 0.1s, opacity 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 25px rgba(255, 75, 122, 0.45);
+      opacity: 0.95;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 7px 15px rgba(255, 75, 122, 0.3);
+    }
+
+    .love-note {
+      background: #fff4fa;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin: 10px 0 14px;
+      border-left: 3px solid #ff4b7a;
+      font-size: 0.9rem;
+    }
+
+    .mini-title {
+      font-size: 0.9rem;
+      color: #ff4b7a;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .compliment-box {
+      background: #fff0fa;
+      padding: 12px;
+      border-radius: 10px;
+      min-height: 48px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .counter {
+      margin-top: 16px;
+      background: #fff6fb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid #ff8ab3;
+      font-size: 0.9rem;
+    }
+
+    /* Galeria */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .photo-card {
+      display: flex;
+      gap: 10px;
+      background: #fffafa;
+      border-radius: 12px;
+      padding: 8px;
+      border: 1px solid #ffe0ec;
+      font-size: 0.85rem;
+    }
+
+    .photo-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff4b7a, #ff7ca3);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    #error {
+      color:#d7263d;
+      font-size:0.8rem;
+      min-height: 16px;
+      margin-top: 4px;
+    }
+
+    /* 💞 Corações flutuando */
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 18px;
+      opacity: 0;
+      animation: floatUp linear forwards;
+      z-index: 1; /* atrás do card, mas acima do fundo */
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-120vh) translateX(-20px) scale(1.4);
+        opacity: 0;
+      }
+    }
