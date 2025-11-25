@@ -2,11 +2,186 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="/css/style.css">
   <title>Para a minha Victória 💕</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffd6e8, #ff8fa3, #ff5d8f);
+      overflow: hidden; /* pra não aparecer scroll com os corações */
+      position: relative;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 24px 24px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      position: relative;
+      z-index: 2; /* fica acima dos corações */
+    }
+
+    .hidden { display: none; }
+
+    h1 { font-size: 1.6rem; margin-bottom: 10px; }
+    h2 { font-size: 1.4rem; margin-bottom: 8px; }
+    p { font-size: 0.95rem; margin-bottom: 10px; }
+    .highlight { color: #ff4b7a; font-weight: 600; }
+
+    .input-group { margin-top: 16px; margin-bottom: 8px; }
+    label { font-size: 0.85rem; margin-bottom: 4px; color: #555; }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #ff4b7a;
+      box-shadow: 0 0 0 2px rgba(255, 75, 122, 0.18);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4b7a, #ff7ca3);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(255, 75, 122, 0.35);
+      transition: transform 0.1s, box-shadow 0.1s, opacity 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 25px rgba(255, 75, 122, 0.45);
+      opacity: 0.95;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 7px 15px rgba(255, 75, 122, 0.3);
+    }
+
+    .love-note {
+      background: #fff4fa;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin: 10px 0 14px;
+      border-left: 3px solid #ff4b7a;
+      font-size: 0.9rem;
+    }
+
+    .mini-title {
+      font-size: 0.9rem;
+      color: #ff4b7a;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .compliment-box {
+      background: #fff0fa;
+      padding: 12px;
+      border-radius: 10px;
+      min-height: 48px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .counter {
+      margin-top: 16px;
+      background: #fff6fb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid #ff8ab3;
+      font-size: 0.9rem;
+    }
+
+    /* Galeria */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .photo-card {
+      display: flex;
+      gap: 10px;
+      background: #fffafa;
+      border-radius: 12px;
+      padding: 8px;
+      border: 1px solid #ffe0ec;
+      font-size: 0.85rem;
+    }
+
+    .photo-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      background: #999;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    #error {
+      color:#d7263d;
+      font-size:0.8rem;
+      min-height: 16px;
+      margin-top: 4px;
+    }
+
+    /* 💞 Corações flutuando */
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 18px;
+      opacity: 0;
+      animation: floatUp linear forwards;
+      z-index: 1; /* atrás do card, mas acima do fundo */
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-120vh) translateX(-20px) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-   <div class="card">
+  <div class="card">
 
     <!-- LOGIN -->
     <div id="login-screen">
@@ -18,7 +193,7 @@
 
       <div class="input-group">
         <label for="password">Digite a data (dd/mm/aaaa)</label>
-        <input type="password" id="password" placeholder="01/06/2006">
+        <input type="password" id="password" placeholder="09/06/2023">
       </div>
 
       <button id="login-button">Entrar</button>
@@ -58,17 +233,17 @@
 
       <div class="gallery">
         <div class="photo-card">
-          <img src="/img/foto3.jpeg" alt="Foto 1 do casal">
+          <img src="foto1.jpg" alt="Foto 1 do casal">
           <div>O primeiro dia que meu coração soube que era você. ❤️</div>
         </div>
 
         <div class="photo-card">
-          <img src="/img/foto2.jpeg" alt="Foto 2 do casal">
+          <img src="foto2.jpg" alt="Foto 2 do casal">
           <div>Momentos simples com você viram momentos perfeitos. ✨</div>
         </div>
 
         <div class="photo-card">
-          <img src="/img/foto1.jpeg" alt="Foto 3 do casal">
+          <img src="foto3.jpg" alt="Foto 3 do casal">
           <div>Eu olho pra essa foto e penso: como tenho sorte. 💘</div>
         </div>
       </div>
@@ -78,6 +253,94 @@
 
   </div>
 
-  <script src="/js/index.js"></script>
+  <script>
+    const SENHA = "09/06/2023";
+
+    const loginScreen = document.getElementById("login-screen");
+    const mainScreen = document.getElementById("main-screen");
+    const galleryScreen = document.getElementById("gallery-screen");
+
+    const error = document.getElementById("error");
+    const daysCountSpan = document.getElementById("days-count");
+    const complimentText = document.getElementById("compliment-text");
+
+    const compliments = [
+      "Victória, seu sorriso ilumina meus dias.",
+      "Eu te escolheria outra vez.",
+      "Estar com você é meu lugar favorito.",
+      "Você é o melhor pedaço da minha vida.",
+      "Eu te amo infinitamente.",
+      "Desde 09/06/2023, você é a minha melhor decisão."
+    ];
+
+    document.getElementById("login-button").onclick = () => {
+      const value = document.getElementById("password").value.trim();
+
+      if (value === SENHA) {
+        error.textContent = "";
+        loginScreen.classList.add("hidden");
+        mainScreen.classList.remove("hidden");
+        atualizarContador();
+      } else {
+        error.textContent = "Essa não é a nossa data, meu amor ❤️";
+      }
+    };
+
+    document.getElementById("password").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("login-button").click();
+      }
+    });
+
+    document.getElementById("compliment-button").onclick = () => {
+      const i = Math.floor(Math.random() * compliments.length);
+      complimentText.textContent = compliments[i];
+    };
+
+    function atualizarContador() {
+      const inicio = new Date(2023, 5, 9); // 09/06/2023 (mês começa em 0)
+      const hoje = new Date();
+      inicio.setHours(0, 0, 0, 0);
+      hoje.setHours(0, 0, 0, 0);
+      const diff = hoje - inicio;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      daysCountSpan.textContent = dias;
+    }
+
+    // Navegação
+    document.getElementById("next-button").onclick = () => {
+      mainScreen.classList.add("hidden");
+      galleryScreen.classList.remove("hidden");
+    };
+
+    document.getElementById("back-button").onclick = () => {
+      galleryScreen.classList.add("hidden");
+      mainScreen.classList.remove("hidden");
+    };
+
+    /* 💞 Corações flutuando */
+    function criarCoracao() {
+      const heart = document.createElement("span");
+      heart.classList.add("heart");
+      heart.textContent = "💞";
+
+      const tamanho = Math.random() * 14 + 14; // 14 a 28px
+      const left = Math.random() * 100; // porcentagem da largura
+      const duracao = Math.random() * 4 + 6; // 6 a 10s
+
+      heart.style.left = left + "vw";
+      heart.style.fontSize = tamanho + "px";
+      heart.style.animationDuration = duracao + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duracao * 1000);
+    }
+
+    // Cria corações continuamente
+    setInterval(criarCoracao, 800);
+  </script>
 </body>
 </html>
