@@ -25,7 +25,7 @@
       <p id="error"></p>
     </div>
 
-    <!-- TELA PRINCIPAL (1) -->
+    <!-- TELA PRINCIPAL -->
     <div id="main-screen" class="hidden">
       <h2>Bem-vinda, meu amor 💘</h2>
       <p class="highlight">Você sempre lembra da nossa data.</p>
@@ -77,7 +77,7 @@
       <button id="to-music-button">Ir para nossa música 🎧</button>
     </div>
 
-    <!-- TELA 3 - MÚSICA ESPECIAL -->
+    <!-- TELA 3 - MÚSICA -->
     <div id="music-screen" class="hidden">
       <h2>Nossa música 🎧💘</h2>
 
@@ -102,11 +102,35 @@
       </div>
 
       <button class="back-btn" id="back-from-music">⟵ Voltar para as fotos</button>
+      <button id="to-puzzle-button">Ir para nosso quebra-cabeça 🧩</button>
+    </div>
+
+    <!-- TELA 4 - QUEBRA-CABEÇA -->
+    <div id="puzzle-screen" class="hidden">
+      <h2>Você me completa 🧩💘</h2>
+
+      <p class="puzzle-intro">
+        Monte nosso quebra-cabeça clicando em duas peças para trocá-las.
+      </p>
+
+      <div class="puzzle-container">
+        <div class="puzzle-grid">
+          <div class="puzzle-piece" data-position="0"></div>
+          <div class="puzzle-piece" data-position="1"></div>
+          <div class="puzzle-piece" data-position="2"></div>
+          <div class="puzzle-piece" data-position="3"></div>
+        </div>
+      </div>
+
+      <p id="puzzle-message">Clique em duas peças para trocar.</p>
+
+      <button id="shuffle-puzzle">Embaralhar 🔄</button>
+      <button class="back-btn" id="back-from-puzzle">⟵ Voltar para a música</button>
     </div>
 
   </div>
 
-  <!-- Áudio da música -->
+  <!-- MÚSICA -->
   <audio id="love-song" src="/audio/meuamor.mp4"></audio>
 
   <script src="/js/index.js"></script>
