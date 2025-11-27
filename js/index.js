@@ -27,7 +27,8 @@ const compliments = [
   "Estar com você é meu lugar favorito.",
   "Você é o melhor pedaço da minha vida.",
   "Eu te amo infinitamente.",
-  "Desde 09/06/2023, você é a minha melhor decisão."
+  "Desde 09/06/2023, você é a minha melhor decisão.",
+  "A Vick ama muito mais o Gabinho do que ele ama ela ( Mentira me obrigou a escrever )"
 ];
 
 // LOGIN
