@@ -5,6 +5,7 @@ const mainScreen = document.getElementById("main-screen");
 const galleryScreen = document.getElementById("gallery-screen");
 const musicScreen = document.getElementById("music-screen");
 const puzzleScreen = document.getElementById("puzzle-screen");
+const memoryScreen = document.getElementById("memory-screen");
 
 const error = document.getElementById("error");
 const daysCountSpan = document.getElementById("days-count");
@@ -20,6 +21,12 @@ const backFromPuzzle = document.getElementById("back-from-puzzle");
 const shufflePuzzleBtn = document.getElementById("shuffle-puzzle");
 const puzzlePieces = Array.from(document.querySelectorAll(".puzzle-piece"));
 const puzzleMessage = document.getElementById("puzzle-message");
+
+const toMemoryButton = document.getElementById("to-memory-button");
+const memoryGrid = document.getElementById("memory-grid");
+const memoryMessage = document.getElementById("memory-message");
+const restartMemoryBtn = document.getElementById("restart-memory");
+const backFromMemory = document.getElementById("back-from-memory");
 
 const compliments = [
   "Victória, seu sorriso ilumina meus dias.",
@@ -130,6 +137,19 @@ backFromPuzzle.onclick = () => {
   musicScreen.classList.remove("hidden");
 };
 
+// NAVEGAÇÃO QUEBRA-CABEÇA -> MEMÓRIA
+toMemoryButton.onclick = () => {
+  puzzleScreen.classList.add("hidden");
+  memoryScreen.classList.remove("hidden");
+  iniciarJogoMemoria();
+};
+
+// NAVEGAÇÃO MEMÓRIA -> QUEBRA-CABEÇA
+backFromMemory.onclick = () => {
+  memoryScreen.classList.add("hidden");
+  puzzleScreen.classList.remove("hidden");
+};
+
 // 🧩 LÓGICA DO QUEBRA-CABEÇA
 // Cada peça tem data-position (posição correta 0-3) e data-piece (qual pedaço está nela)
 function definirBackgroundPorPeca(el) {
@@ -211,6 +231,115 @@ shufflePuzzleBtn.onclick = () => {
   iniciarPuzzle();
 };
 
+// 🧠 JOGO DA MEMÓRIA COM FOTOS
+const imagensMemoria = [
+  "/img/mem1.jpeg",
+  "/img/mem2.jpeg",
+  "/img/mem3.jpeg",
+  "/img/mem4.jpeg",
+  "/img/mem5.jpeg",
+  "/img/mem6.jpeg"
+];
+
+let primeiraCarta = null;
+let segundaCarta = null;
+let travarClique = false;
+let paresEncontrados = 0;
+
+function iniciarJogoMemoria() {
+  // duplica as imagens para formar os pares
+  const cartas = embaralharArray([...imagensMemoria, ...imagensMemoria]);
+
+  memoryGrid.innerHTML = "";
+  primeiraCarta = null;
+  segundaCarta = null;
+  travarClique = false;
+  paresEncontrados = 0;
+  memoryMessage.textContent = "Encontre todos os pares dos nossos momentos. Clique em duas cartas por vez. 💞";
+  memoryMessage.classList.remove("success");
+
+  cartas.forEach((src, index) => {
+    const card = document.createElement("div");
+    card.classList.add("memory-card");
+    card.dataset.image = src;
+    card.dataset.index = index.toString();
+
+    // verso da carta (❔)
+    const span = document.createElement("span");
+    span.textContent = "❔";
+
+    // imagem da carta
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Nosso momento";
+    img.classList.add("memory-img");
+
+    card.appendChild(span);
+    card.appendChild(img);
+
+    card.addEventListener("click", () => {
+      if (travarClique) return;
+      if (card.classList.contains("matched")) return;
+      if (card === primeiraCarta) return;
+
+      revelarCarta(card);
+
+      if (!primeiraCarta) {
+        primeiraCarta = card;
+      } else {
+        segundaCarta = card;
+        checarParFotos();
+      }
+    });
+
+    memoryGrid.appendChild(card);
+  });
+}
+
+function revelarCarta(card) {
+  card.classList.add("revealed");
+}
+
+function esconderCarta(card) {
+  card.classList.remove("revealed");
+}
+
+function checarParFotos() {
+  if (!primeiraCarta || !segundaCarta) return;
+
+  travarClique = true;
+
+  const ehPar = primeiraCarta.dataset.image === segundaCarta.dataset.image;
+
+  if (ehPar) {
+    primeiraCarta.classList.add("matched");
+    segundaCarta.classList.add("matched");
+    paresEncontrados++;
+
+    primeiraCarta = null;
+    segundaCarta = null;
+    travarClique = false;
+
+    if (paresEncontrados === imagensMemoria.length) {
+      // número de pares = imagensMemoria.length
+      memoryMessage.textContent = "Você encontrou todos os pares. Você sempre encontra o meu coração. 💘";
+      memoryMessage.classList.add("success");
+    }
+  } else {
+    setTimeout(() => {
+      esconderCarta(primeiraCarta);
+      esconderCarta(segundaCarta);
+      primeiraCarta = null;
+      segundaCarta = null;
+      travarClique = false;
+    }, 800);
+  }
+}
+
+restartMemoryBtn.onclick = () => {
+  iniciarJogoMemoria();
+};
+
 /* 💞 Corações flutuando */
 function criarCoracao() {
   const heart = document.createElement("span");
@@ -234,6 +363,3 @@ function criarCoracao() {
 
 // Cria corações continuamente
 setInterval(criarCoracao, 800);
-
-// inicia puzzle se a tela for aberta direto por algum motivo
-// (opcional, só pra não ficar em estado vazio)
