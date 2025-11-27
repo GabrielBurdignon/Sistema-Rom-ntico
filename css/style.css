@@ -109,31 +109,61 @@
       font-size: 0.9rem;
     }
 
-    /* Galeria */
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 16px;
-    }
+    /* Galeria estilo Polaroid */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
 
-    .photo-card {
-      display: flex;
-      gap: 10px;
-      background: #fffafa;
-      border-radius: 12px;
-      padding: 8px;
-      border: 1px solid #ffe0ec;
-      font-size: 0.85rem;
-    }
+/* Cada foto vira uma “Polaroid” */
+.photo-card {
+  background: #fffdf7;
+  border-radius: 10px;
+  padding: 8px 8px 10px;
+  width: 140px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+  border: 1px solid #f5e4d6;
+  font-size: 0.78rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-3deg);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
 
-    .photo-card img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
+/* Pequenas variações pra ficar “jogado na mesa” */
+.photo-card:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.photo-card:nth-child(3) {
+  transform: rotate(-2deg);
+}
+
+/* Efeito ao passar o mouse */
+.photo-card:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+}
+
+/* A foto dentro da Polaroid */
+.photo-card img {
+  width: 75%;
+  height: 90px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+
+/* Legenda da foto */
+.photo-card div {
+  margin-top: 2px;
+  line-height: 1.2;
+}
 
     .back-btn {
       margin-top: 20px;
